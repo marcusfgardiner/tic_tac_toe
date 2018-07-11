@@ -1,7 +1,7 @@
 var Game = function() {
-    this.board = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+    this.board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]];
 };
 
-// Game.prototype.readBoard = function(xCoordinate, yCoordinate) {
+Game.prototype.readBoard = function(xCoordinate, yCoordinate) {
     
-// };
+};

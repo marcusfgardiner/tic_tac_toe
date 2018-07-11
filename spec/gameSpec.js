@@ -18,4 +18,9 @@ describe("Game", function() {
           "-"
         ]);
     });
+
+    // it("can read a value on the board based on input coordinates", function() {
+    //     game.board = ["-", "-", "-", "-", "x", "-", "-", "-", "-"];
+    //     expect(game.readBoard(2,2)).toEqual('x')
+    // });
 });

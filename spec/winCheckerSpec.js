@@ -24,21 +24,21 @@ describe("WinChecker", function() {
         });
     });
 
-    describe("isNextTileSale", function() {
+    describe("isNextTileSame", function() {
         it("can check if next horizontal tile the same", function() {
-            var currentX = 1
-            var currentY = 0
-            var movement = 'horizontal'
-            var result = winChecker.isNextTile(winCombo1,currentX,currentY,movement)
-            expect(result).toBe(true)
+            var currentX = 1;
+            var currentY = 0;
+            var movement = 'horizontal';
+            var result = winChecker.isNextTileSame(winCombo1,currentX,currentY,movement);
+            expect(result).toBe(true);
         });
 
         it("can check if next horizontal tile NOT the same", function() {
             var currentX = 1;
             var currentY = 0;
             var movement = "horizontal";
-            var result = winChecker.isNextTile(loseCombo1, currentX, currentY, movement);
-            expect(result).toBe(true);
+            var result = winChecker.isNextTileSame(loseCombo1, currentX, currentY, movement);
+            expect(result).toBe(false);
         });
     });
 });

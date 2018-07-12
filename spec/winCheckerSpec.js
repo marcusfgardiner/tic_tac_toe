@@ -26,18 +26,18 @@ describe("WinChecker", function() {
 
     describe("isNextTileSame", function() {
         it("can check if next horizontal tile the same", function() {
-            var currentX = 0;
-            var currentY = 1;
+            var rowNumber = 0;
+            var cellNumber = 1;
             var movement = 'horizontal';
-            var result = winChecker.isNextTileSame(winCombo1,currentX,currentY,movement);
+            var result = winChecker.isNextTileSame(winCombo1, rowNumber, cellNumber,movement);
             expect(result).toBe(true);
         });
 
         it("can check if next horizontal tile NOT the same", function() {
-            var currentX = 0;
-            var currentY = 1;
+            var rowNumber = 0;
+            var cellNumber = 1;
             var movement = "horizontal";
-            var result = winChecker.isNextTileSame(loseCombo1, currentX, currentY, movement);
+            var result = winChecker.isNextTileSame(loseCombo1, rowNumber, cellNumber, movement);
             expect(result).toBe(false);
         });
     });

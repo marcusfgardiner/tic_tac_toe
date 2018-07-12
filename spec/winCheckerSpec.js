@@ -33,8 +33,12 @@ describe("WinChecker", function() {
             expect(result).toBe(true)
         });
 
-        // it("can check if next horizontal tile NOT the same", function() {
-        //     expect(winChecker.isNextTile().toBe(false));
-        // });
+        it("can check if next horizontal tile NOT the same", function() {
+            var currentX = 1;
+            var currentY = 0;
+            var movement = "horizontal";
+            var result = winChecker.isNextTile(loseCombo1, currentX, currentY, movement);
+            expect(result).toBe(true);
+        });
     });
 });

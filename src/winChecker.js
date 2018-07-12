@@ -12,7 +12,11 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
 };
 
 WinChecker.prototype.isNextTileSame = function(board, currentX, currentY, movement) {
-    return true
+    var currentTile = board[currentX][currentY]
+    var nextTile = board[currentX][currentY + 1]
+    console.log(currentTile)
+    console.log(nextTile)
+    return (currentTile === nextTile)
 };
 
 // Movements will be: horizontal, vertical, diagonal left, diagonal right

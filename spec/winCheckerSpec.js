@@ -26,16 +26,16 @@ describe("WinChecker", function() {
 
     describe("isNextTileSame", function() {
         it("can check if next horizontal tile the same", function() {
-            var currentX = 1;
-            var currentY = 0;
+            var currentX = 0;
+            var currentY = 1;
             var movement = 'horizontal';
             var result = winChecker.isNextTileSame(winCombo1,currentX,currentY,movement);
             expect(result).toBe(true);
         });
 
         it("can check if next horizontal tile NOT the same", function() {
-            var currentX = 1;
-            var currentY = 0;
+            var currentX = 0;
+            var currentY = 1;
             var movement = "horizontal";
             var result = winChecker.isNextTileSame(loseCombo1, currentX, currentY, movement);
             expect(result).toBe(false);

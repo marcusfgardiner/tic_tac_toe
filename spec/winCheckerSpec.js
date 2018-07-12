@@ -14,11 +14,27 @@ describe("WinChecker", function() {
         winCombo8 = [["-", "-", "x"], ["-", "x", "-"], ["x", "-", "-"]];
     });
 
-    it("can correctly assess a win from 3 x's in top row", function() {
-        expect(winChecker.isWinningMove(winCombo1, 'x')).toBe(true)
+    describe("isWinningMove" ,function() {
+        it("can correctly assess a win from 3 x's in top row", function() {
+            expect(winChecker.isWinningMove(winCombo1, "x")).toBe(true);
+        });
+
+        it("can correctly assess a non-win from 3 x's in middle row", function() {
+            expect(winChecker.isWinningMove(loseCombo1, "x")).toBe(false);
+        });
     });
 
-    it("can correctly assess a non-win from 3 x's in middle row", function() {
-        expect(winChecker.isWinningMove(loseCombo1, 'x')).toBe(false);
+    describe("isNextTileSale", function() {
+        it("can check if next horizontal tile the same", function() {
+            var currentX = 1
+            var currentY = 0
+            var movement = 'horizontal'
+            var result = winChecker.isNextTile(winCombo1,currentX,currentY,movement)
+            expect(result).toBe(true)
+        });
+
+        // it("can check if next horizontal tile NOT the same", function() {
+        //     expect(winChecker.isNextTile().toBe(false));
+        // });
     });
 });

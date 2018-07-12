@@ -2,7 +2,8 @@ describe("WinChecker", function() {
     var winChecker;
 
     beforeEach(function() {
-        winChecker = new WinChecker
+        winChecker = new WinChecker();
+        loseCombo1 = [["x", "x", "-"], ["-", "-", "-"], ["-", "-", "-"]];
         winCombo1 = [["x", "x", "x"], ["-", "-", "-"], ["-", "-", "-"]];
         winCombo2 = [["-", "-", "-"], ["x", "x", "x"], ["-", "-", "-"]];
         winCombo3 = [["-", "-", "-"], ["-", "-", "-"], ["x", "x", "x"]];
@@ -14,6 +15,10 @@ describe("WinChecker", function() {
     });
 
     it("can correctly assess a win from 3 x's in top row", function() {
-        winChecker.isWinningMove(winCombo1, 'x').toBe(true)
+        expect(winChecker.isWinningMove(winCombo1, 'x')).toBe(true)
+    });
+
+    it("can correctly assess a non-win from 3 x's in middle row", function() {
+        expect(winChecker.isWinningMove(loseCombo1, 'x')).toBe(false);
     });
 });

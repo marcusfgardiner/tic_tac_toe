@@ -14,6 +14,6 @@ describe("WinChecker", function() {
     });
 
     it("can correctly assess a win from 3 x's in top row", function() {
-
+        winChecker.isWinningMove(winCombo1, 'x').toBe(true)
     });
 });

@@ -7,10 +7,11 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
     // Will probably need a recursion/ loop/ function for each of these 4 check types
     // Work one by one through them and refactor later
     // TODO: current task: ALL horizontals covered through recursion (or loop)
-    return (this.isNextTileSame(board, 0, 0, 'horizontal'))
+    
+    return (this.isWinningCombo(board, 0, 0, 'horizontal'))
 };
 
-WinChecker.prototype.isNextTileSame = function(board, rowNumber, cellNumber, movement) {
+WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, movement) {
     var currentTile = board[rowNumber][cellNumber]
     var nextTile = board[rowNumber][cellNumber + 1]
     if (nextTile === undefined) {
@@ -18,7 +19,7 @@ WinChecker.prototype.isNextTileSame = function(board, rowNumber, cellNumber, mov
         return true
     } else if (currentTile === nextTile) {
         console.log("same tree");
-        return this.isNextTileSame(board, rowNumber, cellNumber + 1, movement);
+        return this.isWinningCombo(board, rowNumber, cellNumber + 1, movement);
     } else {
         console.log("NOT same tree");
         return false

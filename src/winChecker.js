@@ -7,8 +7,18 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
     // Will probably need a recursion/ loop/ function for each of these 4 check types
     // Work one by one through them and refactor later
     // TODO: current task: ALL horizontals covered through recursion (or loop)
-    
-    return (this.isWinningCombo(board, 0, 0, XorO, 'horizontal'))
+    var result
+    // for (let index = 0; index < board.length; index++) {
+    //     const element = array[index];  
+    // }
+    if (this.isWinningCombo(board, 0, 0, XorO, 'horizontal')) {
+        result = true
+    }
+    else if (this.isWinningCombo(board, 1, 0, XorO, "horizontal")) {
+        result = true
+    }
+    else {result = false}
+    return result
 };
 
 WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, XorO, movement) {

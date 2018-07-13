@@ -19,25 +19,21 @@ describe("WinChecker", function() {
             expect(winChecker.isWinningMove(winCombo1, "x")).toBe(true);
         });
 
+        it("can correctly assess a win from 3 x's in second row", function() {
+            expect(winChecker.isWinningMove(winCombo2, "x")).toBe(true);
+        });
+
         it("can correctly assess a non-win", function() {
             expect(winChecker.isWinningMove(loseCombo1, "x")).toBe(false);
         });
     });
 
     describe("isWinningCombo", function() {
-        it("can correctly assess a win from 3 x's in top row", function() {
+        it("can correctly assess a win from 3 x's in a row", function() {
             var rowNumber = 0;
             var cellNumber = 0;
             var movement = "horizontal";
             var result = winChecker.isWinningCombo(winCombo1, rowNumber, cellNumber, 'x', movement);
-            expect(result).toBe(true);
-        });
-
-        it("can correctly assess a win from 3 x's in middle row", function() {
-            var rowNumber = 1;
-            var cellNumber = 0;
-            var movement = "horizontal";
-            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, "x", movement);
             expect(result).toBe(true);
         });
 

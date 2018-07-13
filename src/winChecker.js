@@ -13,7 +13,6 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
 
 WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, XorO, movement) {
     var currentTile = board[rowNumber][cellNumber]
-    var nextTile = board[rowNumber][cellNumber + 1]
     console.log('XorO: ', XorO)
     console.log('current tile:', currentTile)
     if (currentTile === XorO) {

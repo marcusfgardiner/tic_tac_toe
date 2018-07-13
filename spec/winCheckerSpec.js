@@ -24,21 +24,21 @@ describe("WinChecker", function() {
         });
     });
 
-    describe("isNextTileSame", function() {
-        it("can check if next horizontal tile the same", function() {
-            var rowNumber = 0;
-            var cellNumber = 1;
-            var movement = 'horizontal';
-            var result = winChecker.isNextTileSame(winCombo1, rowNumber, cellNumber,movement);
-            expect(result).toBe(true);
-        });
+    // describe("isNextTileSame", function() {
+    //     it("can check if next horizontal tile the same", function() {
+    //         var rowNumber = 0;
+    //         var cellNumber = 1;
+    //         var movement = 'horizontal';
+    //         var result = winChecker.isNextTileSame(winCombo1, rowNumber, cellNumber,movement);
+    //         expect(result).toBe(true);
+    //     });
 
-        it("can check if next horizontal tile NOT the same", function() {
-            var rowNumber = 0;
-            var cellNumber = 1;
-            var movement = "horizontal";
-            var result = winChecker.isNextTileSame(loseCombo1, rowNumber, cellNumber, movement);
-            expect(result).toBe(false);
-        });
-    });
+    //     it("can check if next horizontal tile NOT the same", function() {
+    //         var rowNumber = 0;
+    //         var cellNumber = 1;
+    //         var movement = "horizontal";
+    //         var result = winChecker.isNextTileSame(loseCombo1, rowNumber, cellNumber, movement);
+    //         expect(result).toBe(false);
+    //     });
+    // });
 });

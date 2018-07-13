@@ -33,11 +33,27 @@ describe("WinChecker", function() {
             expect(result).toBe(true);
         });
 
+        it("can correctly assess a win from 3 x's in middle row", function() {
+            var rowNumber = 1;
+            var cellNumber = 0;
+            var movement = "horizontal";
+            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, movement);
+            expect(result).toBe(true);
+        });
+
         it("can correctly assess a NON-win from 2 x's in top row", function() {
             var rowNumber = 0;
             var cellNumber = 0;
             var movement = "horizontal";
             var result = winChecker.isWinningCombo(loseCombo1, rowNumber, cellNumber, movement);
+            expect(result).toBe(false);
+        });
+
+        it("can correctly assess a NON-win from 3 -s in top row", function() {
+            var rowNumber = 0;
+            var cellNumber = 0;
+            var movement = "horizontal";
+            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, movement);
             expect(result).toBe(false);
         });
     });

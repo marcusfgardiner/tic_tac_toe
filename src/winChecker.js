@@ -14,7 +14,9 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
 WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, movement) {
     var currentTile = board[rowNumber][cellNumber]
     var nextTile = board[rowNumber][cellNumber + 1]
-    if (nextTile === undefined) {
+    if (currentTile === '-') {
+        return false
+    } else if (nextTile === undefined) {
         console.log('undefined tree')
         return true
     } else if (currentTile === nextTile) {

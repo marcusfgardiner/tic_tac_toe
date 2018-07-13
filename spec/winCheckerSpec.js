@@ -23,6 +23,10 @@ describe("WinChecker", function() {
             expect(winChecker.isWinningMove(winCombo2, "x")).toBe(true);
         });
 
+        it("can correctly assess a win from 3 x's in third row", function() {
+            expect(winChecker.isWinningMove(winCombo3, "x")).toBe(true);
+        });
+
         it("can correctly assess a non-win", function() {
             expect(winChecker.isWinningMove(loseCombo1, "x")).toBe(false);
         });

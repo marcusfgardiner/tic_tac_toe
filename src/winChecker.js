@@ -8,20 +8,20 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
     // Work one by one through them and refactor later
     // TODO: current task: ALL horizontals covered through recursion (or loop)
     
-    return (this.isWinningCombo(board, 0, 0, 'horizontal'))
+    return (this.isWinningCombo(board, 0, 0, XorO, 'horizontal'))
 };
 
-WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, movement) {
+WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, XorO, movement) {
     var currentTile = board[rowNumber][cellNumber]
     var nextTile = board[rowNumber][cellNumber + 1]
-    if (currentTile === '-') {
-        return false
-    } else if (nextTile === undefined) {
+    console.log('XorO: ', XorO)
+    console.log('current tile:', currentTile)
+    if (currentTile === XorO) {
+        console.log("same tree");
+        return this.isWinningCombo(board, rowNumber, cellNumber + 1, XorO, movement);
+    } else if (currentTile === undefined) {
         console.log('undefined tree')
         return true
-    } else if (currentTile === nextTile) {
-        console.log("same tree");
-        return this.isWinningCombo(board, rowNumber, cellNumber + 1, movement);
     } else {
         console.log("NOT same tree");
         return false

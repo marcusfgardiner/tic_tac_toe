@@ -29,7 +29,7 @@ describe("WinChecker", function() {
             var rowNumber = 0;
             var cellNumber = 0;
             var movement = "horizontal";
-            var result = winChecker.isWinningCombo(winCombo1, rowNumber, cellNumber, movement);
+            var result = winChecker.isWinningCombo(winCombo1, rowNumber, cellNumber, 'x', movement);
             expect(result).toBe(true);
         });
 
@@ -37,7 +37,7 @@ describe("WinChecker", function() {
             var rowNumber = 1;
             var cellNumber = 0;
             var movement = "horizontal";
-            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, movement);
+            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, "x", movement);
             expect(result).toBe(true);
         });
 
@@ -45,7 +45,7 @@ describe("WinChecker", function() {
             var rowNumber = 0;
             var cellNumber = 0;
             var movement = "horizontal";
-            var result = winChecker.isWinningCombo(loseCombo1, rowNumber, cellNumber, movement);
+            var result = winChecker.isWinningCombo(loseCombo1, rowNumber, cellNumber, "x", movement);
             expect(result).toBe(false);
         });
 
@@ -53,7 +53,7 @@ describe("WinChecker", function() {
             var rowNumber = 0;
             var cellNumber = 0;
             var movement = "horizontal";
-            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, movement);
+            var result = winChecker.isWinningCombo(winCombo2, rowNumber, cellNumber, "x", movement);
             expect(result).toBe(false);
         });
     });

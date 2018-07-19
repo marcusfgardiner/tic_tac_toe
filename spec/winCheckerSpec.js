@@ -3,9 +3,6 @@ describe("WinChecker", function() {
 
     beforeEach(function() {
         winChecker = new WinChecker();
-        loseCombo1 = [["x", "x", "-"], ["-", "-", "-"], ["-", "-", "-"]];
-        loseCombo2 = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]];
-        loseCombo3 = [["x", "-", "o"], ["-", "o", "-"], ["o", "o", "x"]];
         winCombo1 = [["x", "x", "x"], ["-", "-", "-"], ["-", "-", "-"]];
         winCombo2 = [["-", "-", "-"], ["x", "x", "x"], ["-", "-", "-"]];
         winCombo3 = [["-", "-", "-"], ["-", "-", "-"], ["x", "x", "x"]];
@@ -14,6 +11,9 @@ describe("WinChecker", function() {
         winCombo6 = [["-", "-", "x"], ["-", "-", "x"], ["-", "-", "x"]];
         winCombo7 = [["x", "-", "-"], ["-", "x", "-"], ["-", "-", "x"]];
         winCombo8 = [["-", "-", "x"], ["-", "x", "-"], ["x", "-", "-"]];
+        loseCombo1 = [["x", "x", "-"], ["-", "-", "-"], ["-", "-", "-"]];
+        loseCombo2 = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]];
+        loseCombo3 = [["x", "-", "o"], ["-", "o", "-"], ["o", "o", "x"]];
     });
 
     describe("isWinningMove" ,function() {

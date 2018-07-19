@@ -22,21 +22,24 @@ WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, Xor
     var currentTile = board[rowNumber][cellNumber]
     console.log('XorO: ', XorO)
     console.log('current tile:', currentTile)
+    console.log('row number', rowNumber)
     if (currentTile === XorO) {
         console.log("good so far tree");
         // TODO: Call the recursive function with different forms of rowNumber++ and cellNumber++ depending on movement
         // This makes the recursive function flexible for different movement types
         // TODO: When done: Refactor to extract this branch into its own function
-    // if (movement === 'horizontal' || movement === 'diagonalRight') {
-    //     cellNumber++
-    // };
-    // if (movement !== 'horizontal') {
-    //     rowNumber++
-    // };
-    // if (movement = 'diagonalLeft') {
-    //     cellNumber--
-    // };
-        // return this.isWinningCombo(board, rowNumber, cellNumber, XorO, movement);
+        if (movement === 'horizontal' || movement === 'diagonalRight') {
+            cellNumber++
+        }
+        // else if (movement !== 'horizontal') {
+        //     rowNumber++
+        // }
+        // else if (movement = 'diagonalLeft') {
+        //     // cellNumber--
+        // };
+            console.log('cell number', cellNumber)
+
+        return this.isWinningCombo(board, rowNumber, cellNumber, XorO, movement);
     } else if (currentTile === undefined) {
         console.log('undefined tree')
         return true

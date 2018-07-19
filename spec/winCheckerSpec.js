@@ -4,6 +4,8 @@ describe("WinChecker", function() {
     beforeEach(function() {
         winChecker = new WinChecker();
         loseCombo1 = [["x", "x", "-"], ["-", "-", "-"], ["-", "-", "-"]];
+        loseCombo2 = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]];
+        loseCombo3 = [["x", "-", "o"], ["-", "o", "-"], ["o", "o", "x"]];
         winCombo1 = [["x", "x", "x"], ["-", "-", "-"], ["-", "-", "-"]];
         winCombo2 = [["-", "-", "-"], ["x", "x", "x"], ["-", "-", "-"]];
         winCombo3 = [["-", "-", "-"], ["-", "-", "-"], ["x", "x", "x"]];
@@ -50,6 +52,14 @@ describe("WinChecker", function() {
 
         it("can correctly assess a non-win", function() {
             expect(winChecker.isWinningMove(loseCombo1, "x")).toBe(false);
+        });
+
+        it("can correctly assess a non-win", function () {
+            expect(winChecker.isWinningMove(loseCombo2, "x")).toBe(false);
+        });
+
+        it("can correctly assess a non-win", function () {
+            expect(winChecker.isWinningMove(loseCombo3, "x")).toBe(false);
         });
     });
 

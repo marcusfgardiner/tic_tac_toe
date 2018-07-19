@@ -9,9 +9,14 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
     // TODO: Call the recursive function once for each type of movement. 
     // Horizontal and vertical BOTH need for loops to move through all horizontals/verticals
     // TODO: When completed: How refactor this? Rather than feeding in movement, could I iterate through a constant array that has the 4 desired values?
+    // TODO: function stops and returns true the second there is a 'true'
     var result = false
     // Diagonal right:
     if (this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")) {
+        result = true;
+    };
+    // Diagonal left:
+    if (this.isWinningCombo(board, 0, 2, XorO, "diagonalLeft")) {
         result = true;
     };
     // Horizontal: 
@@ -26,7 +31,6 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
             result = true;
         }
     }
-    // Diagonal left:
     return result
 };
 

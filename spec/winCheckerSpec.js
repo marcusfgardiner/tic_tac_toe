@@ -17,7 +17,6 @@ describe("WinChecker", function() {
     });
 
     describe("isWinningMove" ,function() {
-        // TODO: add tests for ALL winning combos above (can copy function and just change subbed in win combo)
         it("1 can correctly assess a win from 3 x's in top row", function() {
             expect(winChecker.isWinningMove(winCombo1, "x")).toBe(true);
         });

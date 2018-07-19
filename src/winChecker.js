@@ -10,6 +10,10 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
     // Horizontal and vertical BOTH need for loops to move through all horizontals/verticals
     // TODO: When completed: How refactor this? Rather than feeding in movement, could I iterate through a constant array that has the 4 desired values?
     var result = false
+    // Diagonal right:
+    if (this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")) {
+        result = true;
+    };
     // Horizontal: 
     for (let index = 0; index < board.length; index++) {
         if (this.isWinningCombo(board, index, 0, XorO, "horizontal")) {
@@ -22,6 +26,7 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
             result = true;
         }
     }
+    // Diagonal left:
     return result
 };
 
@@ -46,8 +51,9 @@ WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, Xor
         if (movement === 'horizontal' || movement === 'diagonalRight') {
             cellNumber++
         }
-        else if (movement === 'vertical') {
+        if (movement !== 'horizontal') {
             rowNumber++
+            // (console.log('not horiz'))
         }
         if (movement === 'diagonalLeft') {
             cellNumber--

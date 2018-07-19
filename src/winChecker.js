@@ -31,11 +31,11 @@ WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, Xor
     console.log('movement', movement)
     console.log('board', board)
     // Issue when trying to read rowNumber = 3 that broke test. Fixed with below if statement - need to refactor to remove
-    if (rowNumber === 3) {
-        return true;
+    // Key issue: trying to read the cell number when board[rowNumber] is undefined => error
+    var currentRow = board[rowNumber]
+    if (currentRow !== undefined) {
+        var currentTile = currentRow[cellNumber]
     }
-    var currentTile = board[rowNumber][cellNumber]
-    console.log('does it make it')
     console.log('XorO: ', XorO)
     console.log('current tile:', currentTile)
     if (currentTile === XorO) {

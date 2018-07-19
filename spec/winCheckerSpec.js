@@ -15,6 +15,7 @@ describe("WinChecker", function() {
     });
 
     describe("isWinningMove" ,function() {
+        // TODO: add tests for ALL winning combos above (can copy function and just change subbed in win combo)
         it("can correctly assess a win from 3 x's in top row", function() {
             expect(winChecker.isWinningMove(winCombo1, "x")).toBe(true);
         });
@@ -25,6 +26,26 @@ describe("WinChecker", function() {
 
         it("can correctly assess a win from 3 x's in third row", function() {
             expect(winChecker.isWinningMove(winCombo3, "x")).toBe(true);
+        });
+
+        it("can correctly assess a win from 3 x's in top row", function () {
+            expect(winChecker.isWinningMove(winCombo4, "x")).toBe(true);
+        });
+
+        it("can correctly assess a win from 3 x's in second row", function () {
+            expect(winChecker.isWinningMove(winCombo5, "x")).toBe(true);
+        });
+
+        it("can correctly assess a win from 3 x's in third row", function () {
+            expect(winChecker.isWinningMove(winCombo6, "x")).toBe(true);
+        });
+
+        it("can correctly assess a win from 3 x's in top row", function () {
+            expect(winChecker.isWinningMove(winCombo7, "x")).toBe(true);
+        });
+
+        it("can correctly assess a win from 3 x's in second row", function () {
+            expect(winChecker.isWinningMove(winCombo8, "x")).toBe(true);
         });
 
         it("can correctly assess a non-win", function() {

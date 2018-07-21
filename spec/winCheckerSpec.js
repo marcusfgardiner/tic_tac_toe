@@ -17,12 +17,7 @@ describe("WinChecker", function() {
     });
 
     describe("isWinningMove" ,function() {
-
-        it("correctly translates game board to array of arrays for recursive winCheck function", function() {
-            winChecker = new WinChecker(winCombo1, "x");
-            expect(winChecker.board).toEqual([["x", "x", "x"], [" ", " ", " "], [" ", " ", " "]])
-        });
-
+        
         it("1 can correctly assess a win from 3 x's in top row", function() {
             winChecker = new WinChecker(winCombo1, "x");
             expect(winChecker.isWinningMove()).toBe(true);

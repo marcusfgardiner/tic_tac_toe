@@ -1,7 +1,20 @@
-var WinChecker = function(board, XorO) {
-    this.board = board
+var WinChecker = function(gameBoard, XorO) {
+    this.board = this.translateBoardToArrays(gameBoard);
     this.XorO = XorO
 }
+
+WinChecker.prototype.translateBoardToArrays = function (gameBoard) {
+    var rowLength = Math.sqrt(gameBoard.length)
+    var arrayOfArrays = []
+    for(var i = 0; i < rowLength; i++) {
+        var newArray = []
+        for (let index = 0; index < rowLength; index++) {
+            newArray.push(gameBoard.shift())
+        }
+        arrayOfArrays.push(newArray)
+    };
+    return arrayOfArrays
+};
 
 WinChecker.prototype.isWinningMove = function () {
     if (this._isHorizontalWin()) {
@@ -22,7 +35,7 @@ WinChecker.prototype.isWinningMove = function () {
 WinChecker.prototype._isHorizontalWin = function () {
     for (let index = 0; index < this.board.length; index++) {
         if(this._isWinningCombo(index, 0, "horizontal")) {
-            return true
+            return true 
         };
     };
 };

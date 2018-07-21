@@ -1,3 +1,5 @@
+var prompt = require("prompt");
+
 var UserInterface = function() {
     this.movesBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 };
@@ -8,7 +10,8 @@ UserInterface.prototype.runGame = function() {
     this.printBoard(this.movesBoard);
     while (this.isWinCheck() === false) {
         this.printBoard(this.currentBoard());
-        this.game.playTurn();
+        var cellNumber = this.getMove();
+        // TODO: this.game.playTurn(cellNumber);
     }
 };
 
@@ -24,8 +27,22 @@ UserInterface.prototype.introMessage = function() {
 };
 
 UserInterface.prototype.isWinCheck = function() {
-  var winChecker = new WinChecker(this.currentBoard, XorO);
+  var winChecker = new WinChecker(this.currentBoard, this.game.xOrO());
   return winChecker.isWinningMove();
+};
+
+UserInterface.prototype.getMove = function() {
+    console.log('It is your turn Player ' + this.game.currentPlayer())
+    prompt.start();
+       prompt.get(["cellNumber"], function(error, result) {
+            if (this.game.isValidMove(result)) {
+                return result;
+            }
+            else {
+                console.log('Please input a valid move, cell number 1-9 on a free space!')
+                this.getMove();
+            }
+       });
 };
 
 UserInterface.prototype.currentBoard = function() {

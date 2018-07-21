@@ -1,14 +1,21 @@
 var Game = function() {
-    this.movesBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     this.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+    this.currentPlayer = 1
+    this.movesList = ['X', 'O']
+};
+
+Game.prototype.playTurn = function() {
+    this.whichPlayer()
 };
 
 Game.prototype.readBoard = function(cellNumber) {
     return this.board[cellNumber - 1]
 };
 
+Game.prototype.returnBoard = function() {
+  return this.board;
+};
+
 Game.prototype.updateBoard = function(cellNumber, XorO) {
-    //TODO: check move not already used
-    //TODO: if move not used, update board + add to used moves list
     this.board[cellNumber - 1] = XorO
 };

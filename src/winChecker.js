@@ -44,28 +44,16 @@ WinChecker.prototype.isDiagonalLeftWin = function () {
 };
 
 WinChecker.prototype.isWinningCombo = function(rowNumber, cellNumber, movement) {
-    console.log('row number', rowNumber)
-    console.log('cell number', cellNumber)
-    console.log('movement', movement)
-    console.log('this.board', this.board)
-    var currentRow = this.board[rowNumber]
-    if (currentRow !== undefined) {
-        var currentTile = currentRow[cellNumber]
-    }
-    console.log('this.XorO: ', this.XorO)
-    console.log('current tile:', currentTile)
-    // Same value as previous tile => could still be a winning move
+    var currentTile = this.returnCurrentTile(rowNumber, cellNumber);
+    // Current tile same as previous x/o tile => could still be a winning combination
     if (currentTile === this.XorO) {
-        console.log("good so far tree");
         ({ rowNumber, cellNumber } = this.tileChange(rowNumber, cellNumber, movement));
         return this.isWinningCombo(rowNumber, cellNumber, movement);
-    // End of this.board reached with only same tiles all the way along => winning move
+    // End of board reached with only same tiles all the way along => winning combination
     } else if (currentTile === undefined) {
-        console.log('undefined tree')
         return true
-    // Tile not the same => not a winning move
+    // Tile not the same => not a winning combination
     } else {
-        console.log("NOT same tree");
         return false
     }
 };
@@ -82,4 +70,11 @@ WinChecker.prototype.tileChange = function (rowNumber, cellNumber, movement) {
     }
     ;
     return { rowNumber, cellNumber };
+}
+WinChecker.prototype.returnCurrentTile = function (rowNumber, cellNumber) {
+    var currentRow = this.board[rowNumber];
+    if (currentRow !== undefined) {
+        var currentTile = currentRow[cellNumber];
+    }
+    return currentTile;
 }

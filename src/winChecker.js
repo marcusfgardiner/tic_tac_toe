@@ -1,7 +1,6 @@
 var WinChecker = function() {
     //TODO: pass in board & XorO and save it to winChecker object on initiation = don't need to feed into methods every time
     //TODO: Rather than feeding in movement each time, store currentMovement on WinChecker object
-    // TODO: NICE TO HAVE - Have movetypes be saved as a hash of text values to numbers e.g. {'horizontal' => 1}
 }
 
 WinChecker.prototype.isWinningMove = function(board, XorO) {
@@ -22,30 +21,26 @@ WinChecker.prototype.isWinningMove = function(board, XorO) {
 
 WinChecker.prototype.isHorizontalWin = function(board, XorO) {
     for (let index = 0; index < board.length; index++) {
-        if (this.isWinningCombo(board, index, 0, XorO, "horizontal")) {
-          return true
-        }
-    }
+        if(this.isWinningCombo(board, index, 0, XorO, "horizontal")) {
+            return true
+        };
+    };
 };
 
 WinChecker.prototype.isVerticalWin = function(board, XorO) {
     for (let index = 0; index < board.length; index++) {
-        if (this.isWinningCombo(board, 0, index, XorO, "vertical")) {
-            return true;
-        }
-    }
+        if(this.isWinningCombo(board, 0, index, XorO, "vertical")) {
+            return true
+        };
+    };
 };
 
 WinChecker.prototype.isDiagonalRightWin = function(board, XorO) {
-    if (this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")) {
-        return true;
-    };
+    return this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")
 };
 
 WinChecker.prototype.isDiagonalLeftWin = function(board, XorO) {
-    if (this.isWinningCombo(board, 0, (board.length - 1), XorO, "diagonalLeft")) {
-        return true;
-    };
+    return this.isWinningCombo(board, 0, (board.length - 1), XorO, "diagonalLeft")
 };
 
 WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, XorO, movement) {
@@ -61,6 +56,7 @@ WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, Xor
     }
     console.log('XorO: ', XorO)
     console.log('current tile:', currentTile)
+    // Same value as previous tile => could still be a winning move
     if (currentTile === XorO) {
         console.log("good so far tree");
         // TODO: Refactor to extract this branch into its own function of tileChange
@@ -74,9 +70,11 @@ WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, Xor
             cellNumber--
         };
         return this.isWinningCombo(board, rowNumber, cellNumber, XorO, movement);
+    // End of board reached with only same tiles all the way along => winning move
     } else if (currentTile === undefined) {
         console.log('undefined tree')
         return true
+    // Tile not the same => not a winning move
     } else {
         console.log("NOT same tree");
         return false

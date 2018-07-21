@@ -5,30 +5,47 @@ var WinChecker = function() {
 }
 
 WinChecker.prototype.isWinningMove = function(board, XorO) {
-    // TODO: extract each of 4 types into their own function
-    // TODO: function stops and returns true the second there is a 'true' i.e. break out of function and return true based on if conditions
-    var result = false
-    // Diagonal right:
-    if (this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")) {
-        result = true;
+    if (this.isHorizontalWin(board, XorO)) {
+        return true
     };
-    // Diagonal left:
-    if (this.isWinningCombo(board, 0, (board.length - 1), XorO, "diagonalLeft")) {
-        result = true;
+    if (this.isVerticalWin(board, XorO)) {
+        return true
     };
-    // Horizontal: 
+    if (this.isDiagonalRightWin(board, XorO)) {
+        return true
+    };
+    if (this.isDiagonalLeftWin(board, XorO)) {
+        return true
+    };
+    return false
+};
+
+WinChecker.prototype.isHorizontalWin = function(board, XorO) {
     for (let index = 0; index < board.length; index++) {
         if (this.isWinningCombo(board, index, 0, XorO, "horizontal")) {
-          result = true;
+          return true
         }
     }
-    // Vertical:
+};
+
+WinChecker.prototype.isVerticalWin = function(board, XorO) {
     for (let index = 0; index < board.length; index++) {
         if (this.isWinningCombo(board, 0, index, XorO, "vertical")) {
-            result = true;
+            return true;
         }
     }
-    return result
+};
+
+WinChecker.prototype.isDiagonalRightWin = function(board, XorO) {
+    if (this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")) {
+        return true;
+    };
+};
+
+WinChecker.prototype.isDiagonalLeftWin = function(board, XorO) {
+    if (this.isWinningCombo(board, 0, (board.length - 1), XorO, "diagonalLeft")) {
+        return true;
+    };
 };
 
 WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, XorO, movement) {

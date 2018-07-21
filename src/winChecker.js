@@ -1,5 +1,3 @@
-// debugger; 
-
 var WinChecker = function(board, XorO) {
     this.board = board
     this.XorO = XorO
@@ -7,26 +5,23 @@ var WinChecker = function(board, XorO) {
 }
 
 WinChecker.prototype.isWinningMove = function () {
-    if (this.isHorizontalWin) {
+    if (this.isHorizontalWin()) {
         return true
     };
-    if (this.isVerticalWin) {
+    if (this.isVerticalWin()) {
         return true
     };
-    if (this.isDiagonalRightWin) {
+    if (this.isDiagonalRightWin()) {
         return true
     };
-    if (this.isDiagonalLeftWin) {
+    if (this.isDiagonalLeftWin()) {
         return true
     };
     return false
 };
 
 WinChecker.prototype.isHorizontalWin = function () {
-            console.log("what is this", this);
-    // console.log('board length',this.board.length)
     for (let index = 0; index < this.board.length; index++) {
-        console.log('YOYOYO')
         if(this.isWinningCombo(index, 0, "horizontal")) {
             return true
         };

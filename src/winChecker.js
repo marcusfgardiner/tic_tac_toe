@@ -1,7 +1,6 @@
 var WinChecker = function(board, XorO) {
     this.board = board
     this.XorO = XorO
-    //TODO: Rather than feeding in movement each time, store currentMovement on WinChecker object
 }
 
 WinChecker.prototype.isWinningMove = function () {
@@ -49,8 +48,6 @@ WinChecker.prototype.isWinningCombo = function(rowNumber, cellNumber, movement) 
     console.log('cell number', cellNumber)
     console.log('movement', movement)
     console.log('this.board', this.board)
-    // Issue when trying to read rowNumber = 3 that broke test. Fixed with below if statement - need to refactor to remove
-    // Key issue: trying to read the cell number when this.board[rowNumber] is undefined => error
     var currentRow = this.board[rowNumber]
     if (currentRow !== undefined) {
         var currentTile = currentRow[cellNumber]
@@ -60,16 +57,7 @@ WinChecker.prototype.isWinningCombo = function(rowNumber, cellNumber, movement) 
     // Same value as previous tile => could still be a winning move
     if (currentTile === this.XorO) {
         console.log("good so far tree");
-        // TODO: Refactor to extract this branch into its own function of tileChange
-        if (movement === 'horizontal' || movement === 'diagonalRight') {
-            cellNumber++
-        }
-        if (movement !== 'horizontal') {
-            rowNumber++
-        }
-        if (movement === 'diagonalLeft') {
-            cellNumber--
-        };
+        ({ rowNumber, cellNumber } = this.tileChange(rowNumber, cellNumber, movement));
         return this.isWinningCombo(rowNumber, cellNumber, movement);
     // End of this.board reached with only same tiles all the way along => winning move
     } else if (currentTile === undefined) {
@@ -81,3 +69,17 @@ WinChecker.prototype.isWinningCombo = function(rowNumber, cellNumber, movement) 
         return false
     }
 };
+
+WinChecker.prototype.tileChange = function (rowNumber, cellNumber, movement) {
+    if (movement === 'horizontal' || movement === 'diagonalRight') {
+        cellNumber++;
+    }
+    if (movement !== 'horizontal') {
+        rowNumber++;
+    }
+    if (movement === 'diagonalLeft') {
+        cellNumber--;
+    }
+    ;
+    return { rowNumber, cellNumber };
+}

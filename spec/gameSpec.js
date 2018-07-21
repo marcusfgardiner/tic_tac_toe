@@ -6,16 +6,26 @@ describe("Game", function() {
     }); 
 
     it("starts with a blank tic tac toe board", function() {
-        expect(game.board).toEqual([['-','-','-'],['-','-','-'],['-','-','-']]);
+        expect(game.board).toEqual([
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " ",
+          " "
+        ]);
     });
 
     it("can read a value on the board based on input coordinates", function() {
-        game.board = [["-", "-", "-"], ["-", "x", "-"], ["-", "-", "-"]];
-        expect(game.readBoard(2,2)).toEqual('x')
+        game.board = [" ", " ", " ", " ", "x", " ", " ", " ", " "];
+        expect(game.readBoard(5)).toEqual('x')
     });
 
     it("can update the board based on a provided string input", function() {
-        game.updateBoard(1, 2, "x");
-        expect(game.readBoard(1,2)).toEqual("x");
+        game.updateBoard(5, "x");
+        expect(game.readBoard(5)).toEqual("x");
     });
 });

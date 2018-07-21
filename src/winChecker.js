@@ -25,7 +25,8 @@ WinChecker.prototype.isWinningMove = function () {
 WinChecker.prototype._isHorizontalWin = function () {
     for (let index = 0; index < this.rowLength; index++) {
         this.moveNumber = 0
-        if (this._isWinningCombo((index * this.rowLength), "horizontal")) {
+        var startingCell = (index * this.rowLength)
+        if (this._isWinningCombo(startingCell, "horizontal")) {
             return true;
         }
     };
@@ -47,7 +48,8 @@ WinChecker.prototype._isDiagonalLeftToRightWin = function () {
 
 WinChecker.prototype._isDiagonalRightToLeftWin = function() {
     this.moveNumber = 0
-    return this._isWinningCombo(this.rowLength - 1, "diagonalLeft");
+    var startingCell = this.rowLength - 1
+    return this._isWinningCombo(startingCell, "diagonalLeft");
 };
 
 WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {

@@ -15,7 +15,7 @@ describe("Game", function() {
     });
 
     it("can update the board based on a provided string input", function() {
-        game.move(1,2,'x')
+        game.updateBoard(1, 2, "x");
         expect(game.readBoard(1,2)).toEqual("x");
     });
 });

@@ -1,11 +1,12 @@
 var WinChecker = function() {
-
-};
+    //TODO: pass in board & XorO and save it to winChecker object on initiation = don't need to feed into methods every time
+    //TODO: Rather than feeding in movement each time, store currentMovement on WinChecker object
+    // TODO: NICE TO HAVE - Have movetypes be saved as a hash of text values to numbers e.g. {'horizontal' => 1}
+}
 
 WinChecker.prototype.isWinningMove = function(board, XorO) {
     // TODO: extract each of 4 types into their own function
-    // TODO: When completed: How refactor this? Rather than feeding in movement, could I iterate through a constant array that has the 4 desired values?
-    // TODO: function stops and returns true the second there is a 'true'
+    // TODO: function stops and returns true the second there is a 'true' i.e. break out of function and return true based on if conditions
     var result = false
     // Diagonal right:
     if (this.isWinningCombo(board, 0, 0, XorO, "diagonalRight")) {
@@ -45,9 +46,7 @@ WinChecker.prototype.isWinningCombo = function(board, rowNumber, cellNumber, Xor
     console.log('current tile:', currentTile)
     if (currentTile === XorO) {
         console.log("good so far tree");
-        // TODO: Call the recursive function with different forms of rowNumber++ and cellNumber++ depending on movement
-        // This makes the recursive function flexible for different movement types
-        // TODO: When done: Refactor to extract this branch into its own function
+        // TODO: Refactor to extract this branch into its own function of tileChange
         if (movement === 'horizontal' || movement === 'diagonalRight') {
             cellNumber++
         }

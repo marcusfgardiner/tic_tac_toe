@@ -40,7 +40,6 @@ Game.prototype.currentPlayer = function() {
 Game.prototype.updateBoard = function(cellNumber, XorO) {
   this.board[cellNumber - 1] = XorO;
 };
-
 var WinChecker = function(gameBoard, XorO) {
   this.board = gameBoard;
   this.XorO = XorO;
@@ -65,6 +64,9 @@ WinChecker.prototype.isWinningMove = function() {
     return true;
   }
   if (this._isDiagonalRightToLeftWin()) {
+    return true;
+  }
+  if (this._isTie()) {
     return true;
   }
   return false;
@@ -100,15 +102,24 @@ WinChecker.prototype._isDiagonalRightToLeftWin = function() {
   return this._isWinningCombo(startingCell, "diagonalLeft");
 };
 
+WinChecker.prototype._isTie = function() {
+  console.log("this.board", this.board);
+  if (this.board.indexOf(" ") === -1) {
+    return true;
+  }
+};
+
 WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
   var currentTile = this.board[cellNumber];
   this.moveNumber++;
   if (this.moveNumber > this.rowLength) {
     return true;
   } else if (currentTile === this.XorO) {
+    console.log("same tree");
     cellNumber += this.cellNumberChanges[movement];
     return this._isWinningCombo(cellNumber, movement);
   } else {
+    console.log("fail tree");
     return false;
   }
 };

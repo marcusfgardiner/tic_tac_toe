@@ -4,10 +4,9 @@ var Game = function() {
   this.isPlayerX = true;
 };
 
-Game.prototype.playTurn = function(cellNumber) {
-  this.updateBoard(cellNumber, this.currentPlayer());
-  this.isPlayerX = !(this.isPlayerX);
-};
+Game.prototype.switchPlayer = function() {
+  this.isPlayerX = !this.isPlayerX;
+}
 
 Game.prototype.isValidMove = function(cellNumber) {
   // TODO: This doesn't work yet - returns index result of -1 every time
@@ -38,7 +37,7 @@ Game.prototype.currentPlayer = function() {
 };
 
 Game.prototype.updateBoard = function(cellNumber, XorO) {
-  this.board[cellNumber - 1] = XorO;
+  this.board[cellNumber - 1] = this.currentPlayer();
 };
 
 var WinChecker = function(gameBoard, XorO) {
@@ -132,14 +131,26 @@ UserInterface.prototype.runGame = function() {
   this.game = new Game();
   this.introMessage();
   this.printBoard(this.movesBoard);
-  while (this.isWinCheck() === false) {
-    this.printBoard(this.game.returnBoard());
-    var cellNumber = this.getMove();
-    this.game.playTurn(cellNumber);
-    this.printBoard(this.game.returnBoard());
-  }
-  console.log('Game over, the result is ', this.game.currentPlayer())
+  this.runTurn();
   };
+
+UserInterface.prototype.runTurn = function() {
+  var cellNumber = this.getMove();
+  this.game.updateBoard(cellNumber);
+  this.printBoard(this.game.returnBoard());
+  var result = this.isWinCheck();
+  this.game.switchPlayer();
+  console.log('RESULT', result)
+  if (result === false) {
+    this.runTurn();
+  }
+  else if (result === 'Tie') {
+    console.log("Game over, tie game!")
+  }
+  else {
+    console.log("Game over, the winner is ", result);
+  }
+};
 
 UserInterface.prototype.printBoard = function(board) {
   console.log(
@@ -181,7 +192,7 @@ UserInterface.prototype.introMessage = function() {
 UserInterface.prototype.isWinCheck = function() {
   var currentPlayer = this.game.currentPlayer();
   var winChecker = new WinChecker(this.game.returnBoard(), this.game.currentPlayer());
-  return winChecker.isWinningMove();
+  return winChecker.winningMove();
 };
 
 UserInterface.prototype.getMove = function() {

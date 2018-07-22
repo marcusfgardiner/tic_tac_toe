@@ -14,9 +14,15 @@ describe("WinChecker", function() {
         loseCombo1 = ["x", "x", " ", " ", " ", " ", " ", " ", " "];
         loseCombo2 = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
         loseCombo3 = ["x", " ", "o", " ", "o", " ", "o", "o", "x"];
+        tieCombo1 = ["x", " ", "o", " ", "o", " ", "o", "o", "x"];
     });
 
     describe("isWinningMove" ,function() {
+
+        it("can correctly assess a tie", function() {
+          winChecker = new WinChecker(tieCombo1, "x");
+          expect(winChecker.isWinningMove()).toBe(true);
+        });
         
         it("1 can correctly assess a win from 3 x's in top row", function() {
             winChecker = new WinChecker(winCombo1, "x");

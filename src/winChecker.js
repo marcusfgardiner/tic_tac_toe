@@ -19,6 +19,9 @@ WinChecker.prototype.isWinningMove = function () {
     if (this._isDiagonalRightToLeftWin()) {
         return true
     };
+    if (this._isTie()) {
+        return true
+    }
     return false
 };
 
@@ -50,6 +53,13 @@ WinChecker.prototype._isDiagonalRightToLeftWin = function() {
     this.moveNumber = 0
     var startingCell = this.rowLength - 1
     return this._isWinningCombo(startingCell, "diagonalLeft");
+};
+
+WinChecker.prototype._isTie = function() {
+    console.log("this.board", this.board);
+    if (this.board.indexOf(" ") === -1) {
+        return true
+    }
 };
 
 WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {

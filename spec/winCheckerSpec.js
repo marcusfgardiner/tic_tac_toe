@@ -14,7 +14,7 @@ describe("WinChecker", function() {
         loseCombo1 = ["x", "x", " ", " ", " ", " ", " ", " ", " "];
         loseCombo2 = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
         loseCombo3 = ["x", " ", "o", " ", "o", " ", "o", "o", "x"];
-        tieCombo1 = ["x", " ", "o", " ", "o", " ", "o", "o", "x"];
+        tieCombo1 = ["x", "x", "o", "o", "o", "x", "x", "x", "o"];
     });
 
     describe("isWinningMove" ,function() {

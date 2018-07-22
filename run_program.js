@@ -56,19 +56,19 @@ var WinChecker = function(gameBoard, XorO) {
 
 WinChecker.prototype.winningMove = function() {
   if (this._isHorizontalWin()) {
-    return true;
+    return this.XorO;
   }
   if (this._isVerticalWin()) {
-    return true;
+    return this.XorO;
   }
   if (this._isDiagonalLeftToRightWin()) {
-    return true;
+    return this.XorO;
   }
   if (this._isDiagonalRightToLeftWin()) {
-    return true;
+    return this.XorO;
   }
   if (this._isTie()) {
-    return "tie";
+    return "Tie";
   }
   return false;
 };
@@ -104,7 +104,6 @@ WinChecker.prototype._isDiagonalRightToLeftWin = function() {
 };
 
 WinChecker.prototype._isTie = function() {
-  console.log("this.board", this.board);
   if (this.board.indexOf(" ") === -1) {
     return true;
   }
@@ -116,11 +115,9 @@ WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
   if (this.moveNumber > this.rowLength) {
     return true;
   } else if (currentTile === this.XorO) {
-    console.log("same tree");
     cellNumber += this.cellNumberChanges[movement];
     return this._isWinningCombo(cellNumber, movement);
   } else {
-    console.log("fail tree");
     return false;
   }
 };

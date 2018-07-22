@@ -21,47 +21,47 @@ describe("WinChecker", function() {
 
         it("can correctly assess a tie", function() {
           winChecker = new WinChecker(tieCombo1, "x");
-          expect(winChecker.winningMove()).toEqual('tie');
+          expect(winChecker.winningMove()).toEqual('Tie');
         });
         
         it("1 can correctly assess a win from 3 x's in top row", function() {
             winChecker = new WinChecker(winCombo1, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("2 can correctly assess a win from 3 x's in second row", function() {
             winChecker = new WinChecker(winCombo2, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("3 can correctly assess a win from 3 x's in th   ird row", function() {
             winChecker = new WinChecker(winCombo3, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("4 can correctly assess a win from 3 x's in first column", function () {
             winChecker = new WinChecker(winCombo4, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("5 can correctly assess a win from 3 x's in second column", function () {
             winChecker = new WinChecker(winCombo5, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("6 can correctly assess a win from 3 x's in third column", function () {
             winChecker = new WinChecker(winCombo6, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("7 can correctly assess a win from 3 x's diagonal left to right", function () {
             winChecker = new WinChecker(winCombo7, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("8 can correctly assess a win from 3 x's diagonal right to left", function () {
             winChecker = new WinChecker(winCombo8, "x");
-            expect(winChecker.winningMove()).toBe(true);
+            expect(winChecker.winningMove()).toEqual("x");
         });
 
         it("1 can correctly assess a non win", function() {

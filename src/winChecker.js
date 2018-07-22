@@ -8,19 +8,19 @@ var WinChecker = function(gameBoard, XorO) {
 
 WinChecker.prototype.winningMove = function () {
     if (this._isHorizontalWin()) {
-        return true
+        return this.XorO
     };
     if (this._isVerticalWin()) {
-        return true
+        return this.XorO;
     };
     if (this._isDiagonalLeftToRightWin()) {
-      return true;
+      return this.XorO;
     };
     if (this._isDiagonalRightToLeftWin()) {
-        return true
+        return this.XorO;
     };
     if (this._isTie()) {
-        return 'tie'
+        return 'Tie'
     }
     return false
 };

@@ -6,7 +6,7 @@ var WinChecker = function(gameBoard, XorO) {
     this.moveNumber = 0
 }
 
-WinChecker.prototype.isWinningMove = function () {
+WinChecker.prototype.winningMove = function () {
     if (this._isHorizontalWin()) {
         return true
     };
@@ -20,7 +20,7 @@ WinChecker.prototype.isWinningMove = function () {
         return true
     };
     if (this._isTie()) {
-        return true
+        return 'tie'
     }
     return false
 };

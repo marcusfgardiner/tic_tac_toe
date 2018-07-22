@@ -40,6 +40,7 @@ Game.prototype.currentPlayer = function() {
 Game.prototype.updateBoard = function(cellNumber, XorO) {
   this.board[cellNumber - 1] = XorO;
 };
+
 var WinChecker = function(gameBoard, XorO) {
   this.board = gameBoard;
   this.XorO = XorO;
@@ -53,7 +54,7 @@ var WinChecker = function(gameBoard, XorO) {
   this.moveNumber = 0;
 };
 
-WinChecker.prototype.isWinningMove = function() {
+WinChecker.prototype.winningMove = function() {
   if (this._isHorizontalWin()) {
     return true;
   }
@@ -67,7 +68,7 @@ WinChecker.prototype.isWinningMove = function() {
     return true;
   }
   if (this._isTie()) {
-    return true;
+    return "tie";
   }
   return false;
 };
@@ -134,13 +135,13 @@ UserInterface.prototype.runGame = function() {
   this.game = new Game();
   this.introMessage();
   this.printBoard(this.movesBoard);
-  while (this.isWinCheck() === false) {
+  while (this.isWinCheck() !== true) {
     this.printBoard(this.game.returnBoard());
     var cellNumber = this.getMove();
     this.game.playTurn(cellNumber);
     this.printBoard(this.game.returnBoard());
   }
-  console.log('Game over, the winner is ', this.game.currentPlayer())
+  console.log('Game over, the result is ', this.game.currentPlayer())
   };
 
 UserInterface.prototype.printBoard = function(board) {

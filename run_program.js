@@ -135,7 +135,7 @@ UserInterface.prototype.runGame = function() {
   this.game = new Game();
   this.introMessage();
   this.printBoard(this.movesBoard);
-  while (this.isWinCheck() !== true) {
+  while (this.isWinCheck() === false) {
     this.printBoard(this.game.returnBoard());
     var cellNumber = this.getMove();
     this.game.playTurn(cellNumber);

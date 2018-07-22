@@ -11,7 +11,7 @@ UserInterface.prototype.runGame = function() {
     while (this.isWinCheck() === false) {
         this.printBoard(this.currentBoard());
         var cellNumber = this.getMove();
-        // TODO: this.game.playTurn(cellNumber);
+        this.game.playTurn(cellNumber);
     }
 };
 
@@ -27,8 +27,9 @@ UserInterface.prototype.introMessage = function() {
 };
 
 UserInterface.prototype.isWinCheck = function() {
-  var winChecker = new WinChecker(this.currentBoard, this.game.xOrO());
-  return winChecker.isWinningMove();
+    var currentPlayer = this.game.currentPlayer();
+    var winChecker = new WinChecker(this.currentBoard, currentPlayer);
+    return winChecker.isWinningMove();
 };
 
 UserInterface.prototype.getMove = function() {

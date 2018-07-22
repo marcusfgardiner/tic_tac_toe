@@ -1,15 +1,14 @@
 var Game = function() {
     this.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
     this.validMoves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    this.isPlayer1 = true
+    this.isPlayerX = true
     this.movesList = ['X', 'O']
 };
 
-// Game.prototype.playTurn = function(cellNumber) {
-//     this.whichPlayer()
-//     this.updateBoard(cellNumber, XorO)
-//     this.isPlayer1 = !this.isPlayer1
-// };
+Game.prototype.playTurn = function(cellNumber) {
+    this.updateBoard(cellNumber, this.currentPlayer())
+    this.isPlayer1 = !this.isPlayer1
+};
 
 Game.prototype.isValidMove = function(cellNumber) {
   var index = this.validMoves.indexOf(cellNumber);
@@ -31,11 +30,14 @@ Game.prototype.returnBoard = function() {
 };
 
 Game.prototype.currentPlayer = function() {
-  return this.currentPlayer;
+    if (this.isPlayerX) {
+        return 'X'
+    }
+    else {
+        return 'O'
+    }
 };
 
 Game.prototype.updateBoard = function(cellNumber, XorO) {
     this.board[cellNumber - 1] = XorO
 };
-
-console.log('hello', process.argv);

@@ -10,7 +10,6 @@ Game.prototype.switchPlayer = function() {
 
 Game.prototype.isValidMove = function(cellNumber) {
   // TODO: This doesn't work yet - returns index result of -1 every time
-  console.log('valid moves array', this.validMoves)
   var index = this.validMoves.indexOf(cellNumber + 1);
   if (index === -1) {
     return false;
@@ -198,10 +197,9 @@ UserInterface.prototype.isWinCheck = function() {
 UserInterface.prototype.getMove = function() {
     console.log("It is your turn Player " + this.game.currentPlayer());
     var userInput = prompt("Which cell 1-9?   ");
-    console.log('user input', userInput)
-    console.log('result of valid move function', this.game.isValidMove(userInput))
-    var validMoves = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    var index = validMoves.indexOf(userInput);
+    console.log('User input', userInput)
+    console.log('RESULT of valid move function: ', this.game.isValidMove(userInput))
+    var index = [1, 2, 3, 4, 5, 6, 7, 8, 9].indexOf(userInput);
     console.log('index result', index)
     // if (this.game.isValidMove(userInput)) {
     return userInput
@@ -210,9 +208,6 @@ UserInterface.prototype.getMove = function() {
   //   this.getMove();
   // }
 };
-
-
-
 
 var ticTacToe = new UserInterface();
 ticTacToe.runGame();

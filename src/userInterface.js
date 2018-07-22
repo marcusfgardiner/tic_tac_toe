@@ -50,5 +50,5 @@ UserInterface.prototype.currentBoard = function() {
     this.game.returnBoard();
 };
 
-ticTacToe = new UserInterface
+var ticTacToe = new UserInterface();
 ticTacToe.runGame();

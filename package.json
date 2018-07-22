@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/marcusfgardiner/tic_tac_toe#readme",
   "dependencies": {
-    "prompt": "^1.0.0"
+    "prompt": "^1.0.0",
+    "prompt-sync": "^4.1.6"
   }
 }

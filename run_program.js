@@ -19,12 +19,12 @@ Game.prototype.isValidMove = function(cellNumber) {
   if (index === -1) {
     return false;
   } else {
-    this.deleteMove(this.validMoves, index);
+    this._deleteMove(this.validMoves, index);
     return true;
   }
 };
 
-Game.prototype.deleteMove = function(array, index) {
+Game.prototype._deleteMove = function(array, index) {
     array.splice(index, 1);
 };
 
@@ -141,24 +141,24 @@ var UserInterface = function() {
 UserInterface.prototype.runGame = function() {
   this.game = new Game();
   console.log(this.introMessage)
-  this.printBoard(this.movesBoard);
-  this.runTurn();
+  this._printBoard(this.movesBoard);
+  this._runTurn();
   };
 
-  UserInterface.prototype.printBoard = function(board) {
+  UserInterface.prototype._printBoard = function(board) {
     console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + "\n" + " ---------\n" + " " + board[3] + " | " + board[4] + " | " + board[5] + "\n" + " ---------\n" + " " + board[6] + " | " + board[7] + " | " + board[8] + "\n");
   };
 
-UserInterface.prototype.runTurn = function() {
-  var cellNumber = this.getMove();
+UserInterface.prototype._runTurn = function() {
+  var cellNumber = this._getMove();
   this.game.updateBoard(cellNumber);
-  this.printBoard(this.game.returnBoard());
-  this.checkGameOver();
+  this._printBoard(this.game.returnBoard());
+  this._checkGameOver();
   this.game.switchPlayer();
-  this.runTurn();
+  this._runTurn();
 };
 
-UserInterface.prototype.getMove = function() {
+UserInterface.prototype._getMove = function() {
   console.log("It is your turn Player " + this.game.currentPlayer());
   userInput = prompt("Which cell 1-9?  ");
   userInput = Number(userInput);
@@ -169,11 +169,11 @@ UserInterface.prototype.getMove = function() {
     console.log(
       "INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!"
     );
-    return this.getMove();
+    return this._getMove();
   }
 };
 
-UserInterface.prototype.checkGameOver = function() {
+UserInterface.prototype._checkGameOver = function() {
   var result = this.game.isWinCheck();
   if (result === false) {
     console.log('~~~~~ Next turn ~~~~~')

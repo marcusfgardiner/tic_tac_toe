@@ -1,3 +1,6 @@
+// Node packaging must by installed to get user prompts
+// In terminal, use 'npm install "prompt-sync" --save'
+
 var prompt = require("prompt-sync")();
 
 // Game manages all functional aspects of the game i.e. the board, players, and the moves the players make on the board
@@ -155,7 +158,6 @@ UserInterface.prototype.runTurn = function() {
   this.runTurn();
 };
 
-// TODO: extract to game class as violates 'tell, dont ask principles'?
 UserInterface.prototype.getMove = function() {
   console.log("It is your turn Player " + this.game.currentPlayer());
   userInput = prompt("Which cell 1-9?  ");
@@ -171,7 +173,6 @@ UserInterface.prototype.getMove = function() {
   }
 };
 
-// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
 UserInterface.prototype.checkGameOver = function() {
   var result = this.game.isWinCheck();
   if (result === false) {
@@ -184,7 +185,6 @@ UserInterface.prototype.checkGameOver = function() {
     process.exit()
   }
 }
-// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
 
 var ticTacToe = new UserInterface();
 ticTacToe.runGame();

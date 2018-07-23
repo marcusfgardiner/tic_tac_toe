@@ -134,7 +134,7 @@ UserInterface.prototype.runGame = function() {
   };
 
 UserInterface.prototype.runTurn = function() {
-  var cellNumber = this.getValidatedMove();
+  var cellNumber = this.getMove();
   this.game.updateBoard(cellNumber);
   this.printBoard(this.game.returnBoard());
   this.checkGameOver();
@@ -142,20 +142,16 @@ UserInterface.prototype.runTurn = function() {
 };
 
 
-UserInterface.prototype.getValidatedMove = function() {
-  var userInput = this.getMove
-  var validatedMove = this.validateMove(userInput)
-  return validatedMove
-}
+// UserInterface.prototype.getValidatedMove = function() {
+//   var userInput = this.getMove
+//   var validatedMove = this.validateMove(userInput)
+//   return validatedMove
+// }
 
 
 UserInterface.prototype.getMove = function() {
   console.log("It is your turn Player " + this.game.currentPlayer());
   userInput = prompt("Which cell 1-9?  ");
-  return userInput
-};
-
-UserInterface.prototype.validateMove = function(userInput) {
   userInput = Number(userInput);
   var validMove = this.game.isValidMove(userInput);
   if (validMove) {
@@ -164,9 +160,23 @@ UserInterface.prototype.validateMove = function(userInput) {
     console.log(
       "INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!"
     );
-    // return this.getValidatedMove();
+    return this.getMove()
   }
 };
+
+// UserInterface.prototype.validateMove = function(userInput) {
+//   userInput = Number(userInput);
+//   var validMove = this.game.isValidMove(userInput);
+//   if (validMove) {
+//     return userInput;
+//   } else {
+//     console.log(
+//       "INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!"
+//     );
+//     return this.getMove()
+//     // return this.getValidatedMove();
+//   }
+// };
 
 UserInterface.prototype.printBoard = function(board) {
   console.log(

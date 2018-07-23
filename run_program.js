@@ -41,6 +41,12 @@ Game.prototype.updateBoard = function(cellNumber, currentPlayer) {
   this.board[cellNumber - 1] = this.currentPlayer();
 };
 
+Game.prototype.isWinCheck = function() {
+  var currentPlayer = this.currentPlayer();
+  var winChecker = new WinChecker(this.board, this.currentPlayer());
+  return winChecker.winningMove();
+};
+
 // WinChecker checks the outcome of the game: ongoing, win (which player) and tie
 var WinChecker = function(gameBoard, currentPlayer) {
   this.board = gameBoard;
@@ -167,7 +173,7 @@ UserInterface.prototype.getMove = function() {
 
 // TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
 UserInterface.prototype.checkGameOver = function() {
-  var result = this.isWinCheck();
+  var result = this.game.isWinCheck();
   if (result === false) {
     console.log('~~~~~ Next turn ~~~~~')
   } else if (result === "Tie") {
@@ -178,15 +184,6 @@ UserInterface.prototype.checkGameOver = function() {
     process.exit()
   }
 }
-
-UserInterface.prototype.isWinCheck = function() {
-  var currentPlayer = this.game.currentPlayer();
-  var winChecker = new WinChecker(
-    this.game.returnBoard(),
-    this.game.currentPlayer()
-  );
-  return winChecker.winningMove();
-};
 // TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
 
 var ticTacToe = new UserInterface();

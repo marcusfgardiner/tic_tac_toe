@@ -1,5 +1,6 @@
 var prompt = require("prompt-sync")();
 
+// Game manages all functional aspects of the game i.e. the board, players, and the moves the players make on the board
 var Game = function() {
   this.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
   this.validMoves = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -40,6 +41,7 @@ Game.prototype.updateBoard = function(cellNumber, currentPlayer) {
   this.board[cellNumber - 1] = this.currentPlayer();
 };
 
+// WinChecker checks the outcome of the game: ongoing, win (which player) and tie
 var WinChecker = function(gameBoard, currentPlayer) {
   this.board = gameBoard;
   this.currentPlayer = currentPlayer;
@@ -121,6 +123,7 @@ WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
   }
 };
 
+// User interface is the gateway for how the user interacts with the game. The interaction of the user drives the progress of the game.
 var UserInterface = function() {
   this.movesBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   this.introMessage = "Welcome to Tic Tac Toe." + "\n" + "Submit the number where you want to place your move!";
@@ -131,6 +134,10 @@ UserInterface.prototype.runGame = function() {
   console.log(this.introMessage)
   this.printBoard(this.movesBoard);
   this.runTurn();
+  };
+
+  UserInterface.prototype.printBoard = function(board) {
+    console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + "\n" + " ---------\n" + " " + board[3] + " | " + board[4] + " | " + board[5] + "\n" + " ---------\n" + " " + board[6] + " | " + board[7] + " | " + board[8] + "\n");
   };
 
 UserInterface.prototype.runTurn = function() {
@@ -181,36 +188,6 @@ UserInterface.prototype.isWinCheck = function() {
   return winChecker.winningMove();
 };
 // TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
-
-
-UserInterface.prototype.printBoard = function(board) {
-  console.log(
-    "\n" +
-      " " +
-      board[0] +
-      " | " +
-      board[1] +
-      " | " +
-      board[2] +
-      "\n" +
-      " ---------\n" +
-      " " +
-      board[3] +
-      " | " +
-      board[4] +
-      " | " +
-      board[5] +
-      "\n" +
-      " ---------\n" +
-      " " +
-      board[6] +
-      " | " +
-      board[7] +
-      " | " +
-      board[8] +
-      "\n"
-  );
-};
 
 var ticTacToe = new UserInterface();
 ticTacToe.runGame();

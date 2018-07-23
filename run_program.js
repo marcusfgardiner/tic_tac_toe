@@ -10,9 +10,25 @@ var Game = function() {
   this.isCurrentPlayerX = true;
 };
 
+Game.prototype.updateBoard = function(cellNumber, currentPlayer) {
+  this.board[cellNumber - 1] = this.currentPlayer();
+};
+
+Game.prototype.returnBoard = function() {
+  return this.board;
+};
+
 Game.prototype.switchPlayer = function() {
   this.isCurrentPlayerX = !this.isCurrentPlayerX;
 }
+
+Game.prototype.currentPlayer = function() {
+  if (this.isCurrentPlayerX) {
+    return "X";
+  } else {
+    return "O";
+  }
+};
 
 Game.prototype.isValidMove = function(cellNumber) {
   var index = this.validMoves.indexOf(cellNumber);
@@ -25,23 +41,7 @@ Game.prototype.isValidMove = function(cellNumber) {
 };
 
 Game.prototype._deleteMove = function(array, index) {
-    array.splice(index, 1);
-};
-
-Game.prototype.returnBoard = function() {
-  return this.board;
-};
-
-Game.prototype.currentPlayer = function() {
-  if (this.isCurrentPlayerX) {
-    return "X";
-  } else {
-    return "O";
-  }
-};
-
-Game.prototype.updateBoard = function(cellNumber, currentPlayer) {
-  this.board[cellNumber - 1] = this.currentPlayer();
+  array.splice(index, 1);
 };
 
 Game.prototype.isWinCheck = function() {

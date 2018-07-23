@@ -1,5 +1,6 @@
-// Node packaging must by installed to get user prompts
+// Node must be installed to run the program, along with package 'prompt-sync'
 // In terminal, use 'npm install "prompt-sync" --save'
+// To run program, in terminal use 'node ticTacToe.js'
 
 var prompt = require("prompt-sync")();
 
@@ -132,7 +133,8 @@ WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
   }
 };
 
-// User interface is the gateway for how the user interacts with the game. The interaction of the user drives the progress of the game.
+// User interface is the gateway for how the user interacts with the game. 
+// The interaction of the user drives the progress of the game.
 var UserInterface = function() {
   this.movesBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   this.introMessage = "Welcome to Tic Tac Toe." + "\n" + "Submit the number where you want to place your move!";

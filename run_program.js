@@ -9,7 +9,6 @@ Game.prototype.switchPlayer = function() {
 }
 
 Game.prototype.isValidMove = function(cellNumber) {
-  console.log('VaLID MOVES ARRAY', this.validMoves)
   var index = this.validMoves.indexOf(cellNumber);
   if (index === -1) {
     return false;
@@ -197,7 +196,6 @@ UserInterface.prototype.getMove = function() {
     console.log("It is your turn Player " + this.game.currentPlayer());
     var userInput = prompt("Which cell 1-9?   ");
     userInput = Number(userInput)
-    console.log('USER INPUT', userInput)
     var validMove =  this.game.isValidMove(userInput)
     if (validMove) {
       return userInput;

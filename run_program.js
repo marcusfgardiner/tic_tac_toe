@@ -138,9 +138,12 @@ UserInterface.prototype.runTurn = function() {
   this.game.updateBoard(cellNumber);
   this.printBoard(this.game.returnBoard());
   this.checkGameOver();
-  this.game.switchPlayer();
 };
 
+UserInterface.prototype.nextTurn = function() {
+  this.game.switchPlayer();
+  this.runTurn();
+};
 
 // UserInterface.prototype.getValidatedMove = function() {
 //   var userInput = this.getMove
@@ -212,7 +215,7 @@ UserInterface.prototype.printBoard = function(board) {
 UserInterface.prototype.checkGameOver = function() {
   var result = this.isWinCheck();
   if (result === false) {
-    this.runTurn();
+    this.nextTurn();
   } else if (result === "Tie") {
     console.log("Game over, tie game!");
   } else {

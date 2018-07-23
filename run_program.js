@@ -1,11 +1,13 @@
+var prompt = require("prompt-sync")();
+
 var Game = function() {
   this.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
   this.validMoves = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  this.isPlayerX = true;
+  this.isCurrentPlayerX = true;
 };
 
 Game.prototype.switchPlayer = function() {
-  this.isPlayerX = !this.isPlayerX;
+  this.isCurrentPlayerX = !this.isCurrentPlayerX;
 }
 
 Game.prototype.isValidMove = function(cellNumber) {
@@ -13,13 +15,13 @@ Game.prototype.isValidMove = function(cellNumber) {
   if (index === -1) {
     return false;
   } else {
-    this.validMoves.splice(index, 1);
+    this.deleteMove(this.validMoves, index);
     return true;
   }
 };
 
-Game.prototype.readBoard = function(cellNumber) {
-  return this.board[cellNumber - 1];
+Game.prototype.deleteMove = function(array, index) {
+    array.splice(index, 1);
 };
 
 Game.prototype.returnBoard = function() {
@@ -27,42 +29,42 @@ Game.prototype.returnBoard = function() {
 };
 
 Game.prototype.currentPlayer = function() {
-  if (this.isPlayerX) {
+  if (this.isCurrentPlayerX) {
     return "X";
   } else {
     return "O";
   }
 };
 
-Game.prototype.updateBoard = function(cellNumber, XorO) {
+Game.prototype.updateBoard = function(cellNumber, currentPlayer) {
   this.board[cellNumber - 1] = this.currentPlayer();
 };
 
-var WinChecker = function(gameBoard, XorO) {
+var WinChecker = function(gameBoard, currentPlayer) {
   this.board = gameBoard;
-  this.XorO = XorO;
+  this.currentPlayer = currentPlayer;
   this.rowLength = Math.sqrt(gameBoard.length);
-  this.cellNumberChanges = {
+  this.cellNumberChange = {
     horizontal: 1,
     vertical: this.rowLength,
     diagonalRight: this.rowLength + 1,
     diagonalLeft: this.rowLength - 1
   };
-  this.moveNumber = 0;
+  this.cellCount = 0;
 };
 
 WinChecker.prototype.winningMove = function() {
   if (this._isHorizontalWin()) {
-    return this.XorO;
+    return this.currentPlayer;
   }
   if (this._isVerticalWin()) {
-    return this.XorO;
+    return this.currentPlayer;
   }
   if (this._isDiagonalLeftToRightWin()) {
-    return this.XorO;
+    return this.currentPlayer;
   }
   if (this._isDiagonalRightToLeftWin()) {
-    return this.XorO;
+    return this.currentPlayer;
   }
   if (this._isTie()) {
     return "Tie";
@@ -72,8 +74,8 @@ WinChecker.prototype.winningMove = function() {
 
 WinChecker.prototype._isHorizontalWin = function() {
   for (let index = 0; index < this.rowLength; index++) {
-    this.moveNumber = 0;
-    var startingCell = index * this.rowLength;
+    this.cellCount = 0;
+    var startingCell = (index * this.rowLength);
     if (this._isWinningCombo(startingCell, "horizontal")) {
       return true;
     }
@@ -82,7 +84,7 @@ WinChecker.prototype._isHorizontalWin = function() {
 
 WinChecker.prototype._isVerticalWin = function() {
   for (let index = 0; index < this.rowLength; index++) {
-    this.moveNumber = 0;
+    this.cellCount = 0;
     if (this._isWinningCombo(index, "vertical")) {
       return true;
     }
@@ -90,13 +92,13 @@ WinChecker.prototype._isVerticalWin = function() {
 };
 
 WinChecker.prototype._isDiagonalLeftToRightWin = function() {
-  this.moveNumber = 0;
+  this.cellCount = 0;
   return this._isWinningCombo(0, "diagonalRight");
 };
 
 WinChecker.prototype._isDiagonalRightToLeftWin = function() {
-  this.moveNumber = 0;
-  var startingCell = this.rowLength - 1;
+  this.cellCount = 0;
+  var startingCell = (this.rowLength - 1);
   return this._isWinningCombo(startingCell, "diagonalLeft");
 };
 
@@ -108,18 +110,16 @@ WinChecker.prototype._isTie = function() {
 
 WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
   var currentTile = this.board[cellNumber];
-  this.moveNumber++;
-  if (this.moveNumber > this.rowLength) {
+  this.cellCount++;
+  if (this.cellCount > this.rowLength) {
     return true;
-  } else if (currentTile === this.XorO) {
-    cellNumber += this.cellNumberChanges[movement];
+  } else if (currentTile === this.currentPlayer) {
+    cellNumber += this.cellNumberChange[movement];
     return this._isWinningCombo(cellNumber, movement);
   } else {
     return false;
   }
 };
-
-var prompt = require("prompt-sync")();
 
 var UserInterface = function() {
   this.movesBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];

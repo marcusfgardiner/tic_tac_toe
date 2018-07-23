@@ -138,20 +138,11 @@ UserInterface.prototype.runTurn = function() {
   this.game.updateBoard(cellNumber);
   this.printBoard(this.game.returnBoard());
   this.checkGameOver();
-};
-
-UserInterface.prototype.nextTurn = function() {
   this.game.switchPlayer();
   this.runTurn();
 };
 
-// UserInterface.prototype.getValidatedMove = function() {
-//   var userInput = this.getMove
-//   var validatedMove = this.validateMove(userInput)
-//   return validatedMove
-// }
-
-
+// TODO: extract to game class as violates 'tell, dont ask principles'?
 UserInterface.prototype.getMove = function() {
   console.log("It is your turn Player " + this.game.currentPlayer());
   userInput = prompt("Which cell 1-9?  ");
@@ -163,23 +154,34 @@ UserInterface.prototype.getMove = function() {
     console.log(
       "INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!"
     );
-    return this.getMove()
+    return this.getMove();
   }
 };
 
-// UserInterface.prototype.validateMove = function(userInput) {
-//   userInput = Number(userInput);
-//   var validMove = this.game.isValidMove(userInput);
-//   if (validMove) {
-//     return userInput;
-//   } else {
-//     console.log(
-//       "INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!"
-//     );
-//     return this.getMove()
-//     // return this.getValidatedMove();
-//   }
-// };
+// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
+UserInterface.prototype.checkGameOver = function() {
+  var result = this.isWinCheck();
+  if (result === false) {
+    console.log('~~~~~ Next turn ~~~~~')
+  } else if (result === "Tie") {
+    console.log("Game over, tie game!");
+    process.exit()
+  } else {
+    console.log("Game over, the winner is ", result);
+    process.exit()
+  }
+}
+
+UserInterface.prototype.isWinCheck = function() {
+  var currentPlayer = this.game.currentPlayer();
+  var winChecker = new WinChecker(
+    this.game.returnBoard(),
+    this.game.currentPlayer()
+  );
+  return winChecker.winningMove();
+};
+// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
+
 
 UserInterface.prototype.printBoard = function(board) {
   console.log(
@@ -209,29 +211,6 @@ UserInterface.prototype.printBoard = function(board) {
       "\n"
   );
 };
-
-
-// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
-UserInterface.prototype.checkGameOver = function() {
-  var result = this.isWinCheck();
-  if (result === false) {
-    this.nextTurn();
-  } else if (result === "Tie") {
-    console.log("Game over, tie game!");
-  } else {
-    console.log("Game over, the winner is ", result);
-  }
-}
-
-UserInterface.prototype.isWinCheck = function() {
-  var currentPlayer = this.game.currentPlayer();
-  var winChecker = new WinChecker(
-    this.game.returnBoard(),
-    this.game.currentPlayer()
-  );
-  return winChecker.winningMove();
-};
-// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
 
 var ticTacToe = new UserInterface();
 ticTacToe.runGame();

@@ -21,7 +21,7 @@ Game.prototype.isValidMove = function(cellNumber) {
   } else {
     this._deleteMove(this.validMoves, index);
     return true;
-  }
+  };
 };
 
 Game.prototype._deleteMove = function(array, index) {
@@ -67,19 +67,19 @@ var WinChecker = function(gameBoard, currentPlayer) {
 WinChecker.prototype.winningMove = function() {
   if (this._isHorizontalWin()) {
     return this.currentPlayer;
-  }
+  };
   if (this._isVerticalWin()) {
     return this.currentPlayer;
-  }
+  };
   if (this._isDiagonalLeftToRightWin()) {
     return this.currentPlayer;
-  }
+  };
   if (this._isDiagonalRightToLeftWin()) {
     return this.currentPlayer;
-  }
+  };
   if (this._isTie()) {
     return "Tie";
-  }
+  };
   return false;
 };
 
@@ -89,8 +89,8 @@ WinChecker.prototype._isHorizontalWin = function() {
     var startingCell = (index * this.rowLength);
     if (this._isWinningCombo(startingCell, "horizontal")) {
       return true;
-    }
-  }
+    };
+  };
 };
 
 WinChecker.prototype._isVerticalWin = function() {
@@ -98,8 +98,8 @@ WinChecker.prototype._isVerticalWin = function() {
     this.cellCount = 0;
     if (this._isWinningCombo(index, "vertical")) {
       return true;
-    }
-  }
+    };
+  };
 };
 
 WinChecker.prototype._isDiagonalLeftToRightWin = function() {
@@ -116,7 +116,7 @@ WinChecker.prototype._isDiagonalRightToLeftWin = function() {
 WinChecker.prototype._isTie = function() {
   if (this.board.indexOf(" ") === -1) {
     return true;
-  }
+  };
 };
 
 WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
@@ -184,7 +184,7 @@ UserInterface.prototype._checkGameOver = function() {
     console.log("Game over, the winner is ", result);
     process.exit()
   }
-}
+};
 
 var ticTacToe = new UserInterface();
 ticTacToe.runGame();

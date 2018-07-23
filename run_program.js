@@ -123,29 +123,48 @@ WinChecker.prototype._isWinningCombo = function(cellNumber, movement) {
 
 var UserInterface = function() {
   this.movesBoard = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  this.introMessage = "Welcome to Tic Tac Toe." + "\n" + "Submit the number where you want to place your move!";
 };
 
 UserInterface.prototype.runGame = function() {
   this.game = new Game();
-  this.introMessage();
+  console.log(this.introMessage)
   this.printBoard(this.movesBoard);
   this.runTurn();
   };
 
 UserInterface.prototype.runTurn = function() {
-  var cellNumber = this.getMove();
+  var cellNumber = this.getValidatedMove();
   this.game.updateBoard(cellNumber);
   this.printBoard(this.game.returnBoard());
-  var result = this.isWinCheck();
+  this.checkGameOver();
   this.game.switchPlayer();
-  if (result === false) {
-    this.runTurn();
-  }
-  else if (result === 'Tie') {
-    console.log("Game over, tie game!")
-  }
-  else {
-    console.log("Game over, the winner is ", result);
+};
+
+
+UserInterface.prototype.getValidatedMove = function() {
+  var userInput = this.getMove
+  var validatedMove = this.validateMove(userInput)
+  return validatedMove
+}
+
+
+UserInterface.prototype.getMove = function() {
+  console.log("It is your turn Player " + this.game.currentPlayer());
+  userInput = prompt("Which cell 1-9?  ");
+  return userInput
+};
+
+UserInterface.prototype.validateMove = function(userInput) {
+  userInput = Number(userInput);
+  var validMove = this.game.isValidMove(userInput);
+  if (validMove) {
+    return userInput;
+  } else {
+    console.log(
+      "INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!"
+    );
+    // return this.getValidatedMove();
   }
 };
 
@@ -178,32 +197,28 @@ UserInterface.prototype.printBoard = function(board) {
   );
 };
 
-UserInterface.prototype.introMessage = function() {
-  console.log(
-    "Welcome to Tic Tac Toe." +
-      "\n" +
-      "Submit the number where you want to place your move!"
-  );
-};
+
+// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
+UserInterface.prototype.checkGameOver = function() {
+  var result = this.isWinCheck();
+  if (result === false) {
+    this.runTurn();
+  } else if (result === "Tie") {
+    console.log("Game over, tie game!");
+  } else {
+    console.log("Game over, the winner is ", result);
+  }
+}
 
 UserInterface.prototype.isWinCheck = function() {
   var currentPlayer = this.game.currentPlayer();
-  var winChecker = new WinChecker(this.game.returnBoard(), this.game.currentPlayer());
+  var winChecker = new WinChecker(
+    this.game.returnBoard(),
+    this.game.currentPlayer()
+  );
   return winChecker.winningMove();
 };
-
-UserInterface.prototype.getMove = function() {
-    console.log("It is your turn Player " + this.game.currentPlayer());
-    var userInput = prompt("Which cell 1-9?   ");
-    userInput = Number(userInput)
-    var validMove =  this.game.isValidMove(userInput)
-    if (validMove) {
-      return userInput;
-    } else {
-      console.log("INVALID MOVE: Please input a valid move, cell number 1-9 on a free space!");
-      return this.getMove()
-    }
-};
+// TODO: extract this to winCheck class rather than have it be in UI class? Due to "tell, don't ask"
 
 var ticTacToe = new UserInterface();
 ticTacToe.runGame();

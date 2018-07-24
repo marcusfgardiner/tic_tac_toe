@@ -19,16 +19,16 @@ Game.prototype.returnBoard = function() {
   return this.board;
 };
 
-Game.prototype.switchPlayer = function() {
-  this.isCurrentPlayerX = !this.isCurrentPlayerX;
-}
-
 Game.prototype.currentPlayer = function() {
   if (this.isCurrentPlayerX) {
     return "X";
   } else {
     return "O";
   }
+};
+
+Game.prototype.switchPlayer = function() {
+  this.isCurrentPlayerX = !this.isCurrentPlayerX;
 };
 
 Game.prototype.isValidMove = function(cellNumber) {

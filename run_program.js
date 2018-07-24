@@ -19,6 +19,10 @@ Game.prototype.returnBoard = function() {
   return this.board;
 };
 
+Game.prototype.returnValidMoves = function() {
+  return this.validMoves;
+};
+
 Game.prototype.currentPlayer = function() {
   if (this.isCurrentPlayerX) {
     return "X";
@@ -152,13 +156,19 @@ UserInterface.prototype.runGame = function() {
   };
 
 UserInterface.prototype._runTurn = function() {
-  var cellNumber = this._getMove();
+  var cellNumber = this._getMoveAI();
   this.game.updateBoard(cellNumber);
   this.game.deleteValidMove(cellNumber);
   this._printBoard(this.game.returnBoard());
   this._checkGameOver();
   this.game.switchPlayer();
-  this._runTurn();
+  // this._runTurn();
+};
+
+UserInterface.prototype._getMoveAI = function() {
+  var validMovesArray = this.game.returnValidMoves()
+  var randomMove = validMovesArray[Math.floor(Math.random()*validMovesArray.length)]
+  return randomMove
 };
 
 UserInterface.prototype._printBoard = function(board) {

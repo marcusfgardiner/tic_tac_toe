@@ -1,6 +1,6 @@
 // Node must be installed to run the program, along with package 'prompt-sync'
-// In terminal, use 'npm install "prompt-sync" --save'
-// To run program, in terminal use 'node ticTacToe.js'
+// To install prompt-sync: in terminal, use 'npm install "prompt-sync" --save'
+// To run program: in terminal use 'node ticTacToe.js'
 
 var prompt = require("prompt-sync")();
 
@@ -36,9 +36,13 @@ Game.prototype.isValidMove = function(cellNumber) {
   if (index === -1) {
     return false;
   } else {
-    this._deleteMove(this.validMoves, index);
     return true;
   };
+};
+
+Game.prototype.deleteValidMove = function(cellNumber) {
+  var index = this.validMoves.indexOf(cellNumber);
+    this._deleteMove(this.validMoves, index);
 };
 
 Game.prototype._deleteMove = function(array, index) {
@@ -147,17 +151,18 @@ UserInterface.prototype.runGame = function() {
   this._runTurn();
   };
 
-  UserInterface.prototype._printBoard = function(board) {
-    console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + 
-    "\n" + " ---------\n" + " " 
-    + board[3] + " | " + board[4] + " | " + board[5] + 
-    "\n" + " ---------\n" + " " 
-    + board[6] + " | " + board[7] + " | " + board[8] + "\n");
-  };
+UserInterface.prototype._printBoard = function(board) {
+  console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + 
+  "\n" + " ---------\n" + " " 
+  + board[3] + " | " + board[4] + " | " + board[5] + 
+  "\n" + " ---------\n" + " " 
+  + board[6] + " | " + board[7] + " | " + board[8] + "\n");
+};
 
 UserInterface.prototype._runTurn = function() {
   var cellNumber = this._getMove();
   this.game.updateBoard(cellNumber);
+  this.game.deleteValidMove(cellNumber);
   this._printBoard(this.game.returnBoard());
   this._checkGameOver();
   this.game.switchPlayer();

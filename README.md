@@ -7,6 +7,11 @@ Before your interview, write a program that lets two humans play a game of Tic T
 
 During your interview, you will pair on adding support for a computer player to your game. You can start with random moves and make the AI smarter if you have time.
 
+## How to run the application: 
+- Node must be installed to run the program, along with package 'prompt-sync'
+- To install prompt-sync: in terminal, use 'npm install "prompt-sync" --save'
+- To run program: in terminal use 'node ticTacToe.js'
+
 ## My reflections on completing Tic Tac Toe
 
 Although I appreciate what the Recurse Center is testing in the pair coding interview is pair coding, I have used the exercise to also work on 5 learning areas of particular interest for me: 

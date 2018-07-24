@@ -156,13 +156,21 @@ UserInterface.prototype.runGame = function() {
   };
 
 UserInterface.prototype._runTurn = function() {
-  var cellNumber = this._getMoveAI();
+  var cellNumber = this._getMove();
   this.game.updateBoard(cellNumber);
   this.game.deleteValidMove(cellNumber);
   this._printBoard(this.game.returnBoard());
   this._checkGameOver();
   this.game.switchPlayer();
-  // this._runTurn();
+  this._runTurn();
+};
+
+UserInterface.prototype._getMove = function() {
+  var currentPlayer = this.game.currentPlayer()
+  if (currentPlayer === 'X') {
+    return this._getMoveHuman()
+  }
+  else { return this._getMoveAI() }
 };
 
 UserInterface.prototype._getMoveAI = function() {
@@ -171,15 +179,7 @@ UserInterface.prototype._getMoveAI = function() {
   return randomMove
 };
 
-UserInterface.prototype._printBoard = function(board) {
-  console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + 
-  "\n" + " ---------\n" + " " 
-  + board[3] + " | " + board[4] + " | " + board[5] + 
-  "\n" + " ---------\n" + " " 
-  + board[6] + " | " + board[7] + " | " + board[8] + "\n");
-};
-
-UserInterface.prototype._getMove = function() {
+UserInterface.prototype._getMoveHuman = function() {
   console.log("It is your turn Player " + this.game.currentPlayer());
   userInput = prompt("Which cell 1-9?  ");
   userInput = Number(userInput);
@@ -192,6 +192,36 @@ UserInterface.prototype._getMove = function() {
     );
     return this._getMove();
   }
+};
+
+
+UserInterface.prototype._printBoard = function(board) {
+  console.log(
+    "\n" +
+      " " +
+      board[0] +
+      " | " +
+      board[1] +
+      " | " +
+      board[2] +
+      "\n" +
+      " ---------\n" +
+      " " +
+      board[3] +
+      " | " +
+      board[4] +
+      " | " +
+      board[5] +
+      "\n" +
+      " ---------\n" +
+      " " +
+      board[6] +
+      " | " +
+      board[7] +
+      " | " +
+      board[8] +
+      "\n"
+  );
 };
 
 UserInterface.prototype._checkGameOver = function() {

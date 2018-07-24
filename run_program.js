@@ -151,14 +151,6 @@ UserInterface.prototype.runGame = function() {
   this._runTurn();
   };
 
-UserInterface.prototype._printBoard = function(board) {
-  console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + 
-  "\n" + " ---------\n" + " " 
-  + board[3] + " | " + board[4] + " | " + board[5] + 
-  "\n" + " ---------\n" + " " 
-  + board[6] + " | " + board[7] + " | " + board[8] + "\n");
-};
-
 UserInterface.prototype._runTurn = function() {
   var cellNumber = this._getMove();
   this.game.updateBoard(cellNumber);
@@ -167,6 +159,14 @@ UserInterface.prototype._runTurn = function() {
   this._checkGameOver();
   this.game.switchPlayer();
   this._runTurn();
+};
+
+UserInterface.prototype._printBoard = function(board) {
+  console.log("\n" + " " + board[0] + " | " + board[1] + " | " + board[2] + 
+  "\n" + " ---------\n" + " " 
+  + board[3] + " | " + board[4] + " | " + board[5] + 
+  "\n" + " ---------\n" + " " 
+  + board[6] + " | " + board[7] + " | " + board[8] + "\n");
 };
 
 UserInterface.prototype._getMove = function() {

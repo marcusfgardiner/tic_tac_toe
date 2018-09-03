@@ -6,7 +6,7 @@ describe("Game", function() {
     }); 
 
     it("can read a value on the board based on input cell", function() {
-        game.board = [" ", " ", " ", " ", "x", " ", " ", " ", " "];
+        game.updateBoard(5, "x");
         expect(game.readBoard(5)).toEqual('x')
     });
 

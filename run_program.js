@@ -2,6 +2,8 @@
 // To install prompt-sync: in terminal, use 'npm install "prompt-sync" --save'
 // To run program: in terminal use 'node ticTacToe.js'
 
+//TODO: Separate into individual class files
+
 var prompt = require("prompt-sync")();
 
 // Game manages all functional aspects of the game i.e. the board, players, and the moves the players make on the board
@@ -69,6 +71,12 @@ var WinChecker = function(gameBoard, currentPlayer) {
   this.cellCount = 0;
 };
 
+
+// TODO: branching if statements => Use polymorphism, strategy pattern
+// This is exactly the same as the whole 'is_a' from polymorphism! I didn't notice I was doing this classic trap!
+// Example: 
+// const waysToWin = [new HorizontalWinChecker(), new VerticalWinChecker(), new DiagonalWinChecker()]; … 
+// let isWin = waysToWin.some((winStrategy) => winStrategy.isWin(cells))
 WinChecker.prototype.winningMove = function() {
   if (this._isHorizontalWin()) {
     return this.currentPlayer;
@@ -151,6 +159,13 @@ UserInterface.prototype.runGame = function() {
   this._runTurn();
   };
 
+
+//TODO: Extract this huge number of calls to 'game' (including the calls to game within these methods!)
+// Order of the below is important, but can have the return value back to this method include
+// several data points in e.g. an array/ hash
+// Explanation:  If a class calling another class needs the other class to do one thing, then another, then another thing, 
+// it's much cleaner to wrap this in a single method in the other class being called
+// otherwise, the calling code needs to know too much about the class being called and that makes it brittle and difficult to change.
 UserInterface.prototype._runTurn = function() {
   var cellNumber = this._getMove();
   this.game.updateBoard(cellNumber);

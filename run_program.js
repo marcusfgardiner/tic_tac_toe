@@ -37,11 +37,7 @@ Game.prototype.switchPlayer = function() {
 
 Game.prototype.isValidMove = function(cellNumber) {
   var index = this.validMoves.indexOf(cellNumber);
-  if (index === -1) {
-    return false;
-  } else {
-    return true;
-  };
+  return index !== -1
 };
 
 Game.prototype.deleteValidMove = function(cellNumber) {

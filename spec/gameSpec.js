@@ -5,20 +5,6 @@ describe("Game", function() {
         game = new Game();
     }); 
 
-    it("starts with a blank tic tac toe board", function() {
-        expect(game.board).toEqual([
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          " ",
-          " "
-        ]);
-    });
-
     it("can read a value on the board based on input cell", function() {
         game.board = [" ", " ", " ", " ", "x", " ", " ", " ", " "];
         expect(game.readBoard(5)).toEqual('x')

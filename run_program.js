@@ -13,6 +13,15 @@ var Game = function() {
   this.isCurrentPlayerX = true;
 };
 
+//TODO: Extract Cells to their own class: each should have a label(1 to 9) and a state(O, X or empty).
+// Extract classes for data structures! Key to watch out for: multiple methods all referring to that data structure, all with the same data structure!
+//TODO: Use extracted cells to update move validation: 
+// *The advantage of this approach is that you don 't then have to e.g. maintain separate state to check for valid moves (you don’t have to maintain a separate array of valid moves that you update/ delete) - the list of valid moves becomes intrinsic to the array of cells (and whether those cells are empty or not) *
+//   Mapping through array of cells, filtering for only the empty cells by checking
+//   if each one of those cells is empty, mapping through that array of only empty cells 
+// to create the list of valid moves(moves that are still available) *
+//   i.e.cells.filter((cell) => cell.state === EMPTY).map((cell) => cell.label).*It 's almost always preferable to colocate linked state in a class than maintain separate data structures for different bits of state.
+
 Game.prototype.updateBoard = function(cellNumber, currentPlayer) {
   this.board[cellNumber - 1] = this.currentPlayer();
 };
